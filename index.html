@@ -360,18 +360,18 @@ Nunca te pediremos tu frase semilla, claves privadas ni acceso remoto.</p>
 <span>Nunca te pediremos tu frase semilla, tus claves privadas ni acceso remoto a tus dispositivos.</span>
 </div>
 </div>
-<form onsubmit="return false" style="background: var(--white); color: var(--navy-700); border-radius: 12px; padding: 40px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box;">
+<form id="form-caso" style="background: var(--white); color: var(--navy-700); border-radius: 12px; padding: 40px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box;">
 <h3 style="margin: 0 0 4px; font-family: var(--font-serif); font-size: 23px; font-weight: 700; letter-spacing: -.01em;">Solicita la evaluación de tu caso</h3>
 <div class="form-row">
-<label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600;">Nombre completo<input class="field" type="text" autocomplete="name" placeholder="Tu nombre y apellido"></label>
-<label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600;">Correo electrónico<input class="field" type="email" autocomplete="email" placeholder="nombre@correo.com"></label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600;">Nombre completo<input class="field" type="text" name="nombre" required="" autocomplete="name" placeholder="Tu nombre y apellido"></label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600;">Correo electrónico<input class="field" type="email" name="correo" autocomplete="email" placeholder="nombre@correo.com"></label>
 </div>
 <div class="form-row">
-<label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600;">Teléfono o WhatsApp<input class="field" type="tel" autocomplete="tel" placeholder="+57 300 000 0000"></label>
-<label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600;">País<input class="field" type="text" autocomplete="country-name" placeholder="País de residencia"></label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600;">Teléfono o WhatsApp<input class="field" type="tel" name="telefono" required="" autocomplete="tel" placeholder="+57 300 000 0000"></label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600;">País<input class="field" type="text" name="pais" autocomplete="country-name" placeholder="País de residencia"></label>
 </div>
 <label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600;">Tipo de caso
-<select class="field">
+<select class="field" name="tipo">
 <option>Estafa de inversión con criptomonedas</option>
 <option>Robo o hackeo de billetera</option>
 <option>Cuenta de exchange comprometida</option>
@@ -379,11 +379,12 @@ Nunca te pediremos tu frase semilla, claves privadas ni acceso remoto.</p>
 </select>
 </label>
 <label style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600;">Cuéntanos qué pasó
-<textarea class="field" rows="4" placeholder="Fechas, montos aproximados y plataformas involucradas" style="min-height: 120px; resize: vertical;"></textarea>
+<textarea class="field" name="caso" required="" rows="4" placeholder="Fechas, montos aproximados y plataformas involucradas" style="min-height: 120px; resize: vertical;"></textarea>
 <span style="font-size: 13px; font-weight: 400; color: var(--ink-muted);">No incluyas contraseñas, frases semilla ni claves privadas.</span>
 </label>
-<label style="display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; color: var(--ink-muted);"><input type="checkbox" style="width: 20px; height: 20px; margin: 0; accent-color: #172b49; flex-shrink: 0;"><span>Acepto la <a href="#" style="color: var(--navy-700);">política de privacidad</a> y el tratamiento de mis datos para evaluar mi caso.</span></label>
-<button class="btn btn-navy" type="submit" style="width: 100%;">Enviar mi caso</button>
+<label style="display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; color: var(--ink-muted);"><input type="checkbox" name="acepto" required="" style="width: 20px; height: 20px; margin: 0; accent-color: #172b49; flex-shrink: 0;"><span>Acepto la <a href="#" style="color: var(--navy-700);">política de privacidad</a> y el tratamiento de mis datos para evaluar mi caso.</span></label>
+<button class="btn btn-navy" type="submit" style="width: 100%;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.8 7L4 20l1-4.1A8 8 0 1 1 20 12Z"/></svg>Enviar mi caso por WhatsApp</button>
+<p style="margin: -8px 0 0; font-size: 13px; line-height: 1.6; color: var(--ink-muted); text-align: center;">Se abrirá WhatsApp con tu mensaje listo. Solo tienes que presionar enviar.</p>
 <p style="margin: 0; font-size: 13px; line-height: 1.6; color: var(--ink-muted); text-align: center;">Cada caso requiere una evaluación individual. No se garantiza la recuperación de fondos.</p>
 </form>
 </div>
@@ -456,6 +457,25 @@ Nunca te pediremos tu frase semilla, claves privadas ni acceso remoto.</p>
   menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ set(false); }); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !menu.hidden){ set(false); btn.focus(); } });
   window.matchMedia('(min-width:1101px)').addEventListener('change',function(e){ if(e.matches) set(false); });
+})();
+(function(){
+  var f=document.getElementById('form-caso');
+  if(!f) return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    function v(n){ var el=f.elements[n]; return ((el&&el.value)||'').trim(); }
+    var lineas=[
+      'Hola, quisiera solicitar una evaluación de mi caso.',
+      '',
+      'Nombre: '+v('nombre'),
+      'Correo: '+(v('correo')||'—'),
+      'Teléfono/WhatsApp: '+v('telefono'),
+      'País: '+(v('pais')||'—'),
+      'Tipo de caso: '+v('tipo'),
+      'Qué pasó: '+v('caso')
+    ];
+    window.open('https://wa.me/17164631442?text='+encodeURIComponent(lineas.join('\n')),'_blank','noopener');
+  });
 })();
 </script>
 </body>
